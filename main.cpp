@@ -14,6 +14,20 @@ public:
         this->right=NULL;
     }
 };
+/*************************defination of doubly linked list
+class Dll
+{
+public:
+    int data;
+    Dll* next;
+    dll* prev;
+    Dll(int data)
+    {
+        this.data=data;
+        this.next=NULL;
+        this.prev=NULL;
+    }
+};*/////////////////////////
 /********************function for inserting into tree*///////////////////////////
 void insertIntoBinaryTree(Bst* &root,int data)
 {
@@ -53,14 +67,14 @@ bool findNodeInBst(Bst* root,int data)
     else
         return root->data==data||findNodeInBst(root->left,data)||findNodeInBst(root->right,data);
 }*/////////////////////
-
+/***************************************************
 Bst* findMaxNodeInBst(Bst* root)
 {
     if(!root->right)
         return root;
     else
         return findMaxNodeInBst(root->right);
-}
+}*/////////////////////////////////////////
 /******************************finding pointer of given node
 Bst* findNode(Bst* root,int data)
 {
@@ -139,16 +153,15 @@ int LeastCommonAncessorInBst(Bst* root,int a,int b)
 
 }
 *//////////////////////////////////////////////////
-
+/**************************************
 bool isBinarySearchTree(Bst* root)
 {
     if(!root||!root->left&&!root->right)
         return true;
-  /*  else
-        return ((root->left?root->data>root->left->data:true)&&(root->right?root->data<root->right->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);*/
+
     else
        return ((root->left?root->data>findMaxNodeInBst(root->left)->data:true)&&(root->right?root->data<findMinimuminBst(root->right)->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
-}
+}*////////////////////////////////////
 /**********************
 int numberOftreesPossibleWithNnodes(int n)
 {
@@ -176,6 +189,43 @@ int leastCommonanAncesstorOfTwoNodes(Bst* root,int a,int b)
     else
         return leastCommonanAncesstorOfTwoNodes(root->left,a,b)?leastCommonanAncesstorOfTwoNodes(root->left,a,b):leastCommonanAncesstorOfTwoNodes(root->right,a,b);
 }*//////////////////////////////////////////////////////////////////////////
+
+void conversionFromBstToDoublyLinkedList(Bst* root,Bst* &last,Bst* &headpointer)
+{
+    if(!root)
+        return;
+    else
+    {
+        conversionFromBstToDoublyLinkedList(root->left,last,headpointer);
+        if(!last)
+            headpointer=root;
+        else
+            last->right=root;
+        root->left=last;
+        last=root;
+        conversionFromBstToDoublyLinkedList(root->right,last,headpointer);
+    }
+}
+void printDoublyLinkedList(Bst* root)
+{
+    while(root)
+    {
+        cout<<root->data<<" ";
+        root=root->right;
+    }
+}
+/**************
+Dll* convesrionFromBstToDll(Bst* root,Dll* head)
+{
+    if(!root)
+        return null;
+        {
+            head=new Dll(root->data);
+            head->prev=convesrionFromBstToDll(root->left,head);
+            head->next=convesrionFromBstToDll(root->righ,)
+
+        }
+}*///////////////////////////////////
 int main()
 {
    Bst* root=NULL;
@@ -211,13 +261,17 @@ int main()
     int dataForLcs1,dataForLcs2;
     cin>>dataForLcs1>>dataForLcs2;
     cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
-  if(isBinarySearchTree(root))
-        cout<<"yes";
+/***  if(isBinarySearchTree(root))
+        cout<<"yes";*/
      /************   int numberofnodes;
         cin>>numberofnodes;
         cout<<numberOftreesPossibleWithNnodes(numberofnodes);*//////////////////
  /**********************int a,b;
     cin>>a>>b;
     cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);*////////////////////////////
+    Bst* head=NULL;
+    Bst* last=NULL;
+    conversionFromBstToDoublyLinkedList(root,last,head);
+    printDoublyLinkedList(head);
     return 0;
 }
