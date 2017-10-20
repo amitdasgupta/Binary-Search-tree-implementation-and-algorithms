@@ -148,6 +148,7 @@ bool isBinarySearchTree(Bst* root)
     else
         return ((root->left?root->data>root->left->data:true)&&(root->right?root->data<root->right->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
 }*/////////////////
+/**********************
 int numberOftreesPossibleWithNnodes(int n)
 {
     if(n==0)
@@ -160,9 +161,21 @@ int numberOftreesPossibleWithNnodes(int n)
          }
         return sum;
     }
+}*///////////////////////////////////////////////////
+int leastCommonanAncesstorOfTwoNodes(Bst* root,int a,int b)
+{
+    if(!root)
+        return 0;
+    if(root->data==a||root->data==b)
+        return root->data;
+    else
+        if(leastCommonanAncesstorOfTwoNodes(root->left,a,b)&&leastCommonanAncesstorOfTwoNodes(root->right,a,b))
+        return root->data;
+    else
+        return leastCommonanAncesstorOfTwoNodes(root->left,a,b)?leastCommonanAncesstorOfTwoNodes(root->left,a,b):leastCommonanAncesstorOfTwoNodes(root->right,a,b);
 }
 int main()
-{/*
+{
    Bst* root=NULL;
    insertIntoBinaryTree(root,10);
    insertIntoBinaryTree(root,6);
@@ -172,7 +185,7 @@ int main()
    insertIntoBinaryTree(root,13);
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
-   cout<<"\n";*/
+   cout<<"\n";
     /*********************
     implementation of basic algorithms
      int data;
@@ -198,8 +211,11 @@ int main()
     cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
   /**************************  if(isBinarySearchTree(root))
         cout<<"yes";*/////////////////////////////////////////////////////////
-        int numberofnodes;
+     /************   int numberofnodes;
         cin>>numberofnodes;
-        cout<<numberOftreesPossibleWithNnodes(numberofnodes);
+        cout<<numberOftreesPossibleWithNnodes(numberofnodes);*//////////////////
+    int a,b;
+    cin>>a>>b;
+    cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);
     return 0;
 }
