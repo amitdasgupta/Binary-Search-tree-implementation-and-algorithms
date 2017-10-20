@@ -2,6 +2,7 @@
 1508388745 source:d:\practice\bstimplementation\main.cpp
 	<iostream>
 
-1508489434 source:d:\practice\bstimplementation\binary-search-tree-implementation-and-algorithms\main.cpp
+1508528329 source:d:\practice\bstimplementation\binary-search-tree-implementation-and-algorithms\main.cpp
 	<iostream>
+	<math.h>
 

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include<math.h>
 using namespace std;
 class Bst{
 /****************tree defination*/////////////////////////
@@ -131,7 +131,6 @@ void deleteNodeInBst(Bst* &root,int data)
                 root->data=root->left?root->left->data:root->right->data;
                 deleteNodeInBst(root,root->left?root->left->data:root->right->data);
             }
-
         }
         else
         {
@@ -150,7 +149,6 @@ int LeastCommonAncessorInBst(Bst* root,int a,int b)
     }
     else
         return (LeastCommonAncessorInBst(root->left,a,b)?LeastCommonAncessorInBst(root->left,a,b):LeastCommonAncessorInBst(root->right,a,b))?(LeastCommonAncessorInBst(root->left,a,b)?LeastCommonAncessorInBst(root->left,a,b):LeastCommonAncessorInBst(root->right,a,b)):(root->data==a?a:b);
-
 }
 *//////////////////////////////////////////////////
 /**************************************
@@ -158,7 +156,6 @@ bool isBinarySearchTree(Bst* root)
 {
     if(!root||!root->left&&!root->right)
         return true;
-
     else
        return ((root->left?root->data>findMaxNodeInBst(root->left)->data:true)&&(root->right?root->data<findMinimuminBst(root->right)->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
 }*////////////////////////////////////
@@ -214,6 +211,38 @@ void printDoublyLinkedList(Bst* root)
         root=root->right;
     }
 }
+int findLengthOfLinkedList(Bst* head)
+{
+    int n=0;
+    while(head)
+    {
+        n++;
+        head=head->right;
+    }
+    return n;
+}
+Bst* conversionFromDoublyLinkedListToBst(Bst* root)
+{
+    if(!root||!root->right)
+        return root;
+    else
+    {   Bst *temp=root,*p=root,*q;
+        int len=findLengthOfLinkedList(root)/2;
+        while(len--)
+        {
+            temp=temp->right;
+        }
+        while(p->right!=temp)
+            p=p->right;
+        q=temp->right;
+        p->right=NULL;
+        q->left=NULL;
+        temp->left=conversionFromDoublyLinkedListToBst(root);
+        temp->right=conversionFromDoublyLinkedListToBst(q);
+                return temp;
+    }
+
+}
 /**************
 Dll* convesrionFromBstToDll(Bst* root,Dll* head)
 {
@@ -223,7 +252,6 @@ Dll* convesrionFromBstToDll(Bst* root,Dll* head)
             head=new Dll(root->data);
             head->prev=convesrionFromBstToDll(root->left,head);
             head->next=convesrionFromBstToDll(root->righ,)
-
         }
 }*///////////////////////////////////
 int main()
@@ -272,6 +300,9 @@ int main()
     Bst* head=NULL;
     Bst* last=NULL;
     conversionFromBstToDoublyLinkedList(root,last,head);
-    printDoublyLinkedList(head);
+   // printDoublyLinkedList(head);
+    Bst* converted=conversionFromDoublyLinkedListToBst(head);
+    cout<<"\n";
+    inOrderTraversal(converted);
     return 0;
 }
