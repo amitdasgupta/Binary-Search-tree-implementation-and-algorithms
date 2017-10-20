@@ -28,14 +28,14 @@ void insertIntoBinaryTree(Bst* &root,int data)
 
 
 }
-/*************************************code for finding minimum element in bst
+
 Bst* findMinimuminBst(Bst* root)
 {
     if(!root->left)
         return root;
     else
         return findMinimuminBst(root->left);
-}*/////////////////////
+}
 /***************************************doin inorde traversal*/////////////////////////////////
 void inOrderTraversal(Bst* root)
 {
@@ -53,14 +53,14 @@ bool findNodeInBst(Bst* root,int data)
     else
         return root->data==data||findNodeInBst(root->left,data)||findNodeInBst(root->right,data);
 }*/////////////////////
-/*************************************code for finding maximum element in bst
+
 Bst* findMaxNodeInBst(Bst* root)
 {
     if(!root->right)
         return root;
     else
         return findMaxNodeInBst(root->right);
-}*/////////////////////
+}
 /******************************finding pointer of given node
 Bst* findNode(Bst* root,int data)
 {
@@ -139,15 +139,16 @@ int LeastCommonAncessorInBst(Bst* root,int a,int b)
 
 }
 *//////////////////////////////////////////////////
-/********************************
-checking binary search property
+
 bool isBinarySearchTree(Bst* root)
 {
     if(!root||!root->left&&!root->right)
         return true;
+  /*  else
+        return ((root->left?root->data>root->left->data:true)&&(root->right?root->data<root->right->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);*/
     else
-        return ((root->left?root->data>root->left->data:true)&&(root->right?root->data<root->right->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
-}*/////////////////
+       return ((root->left?root->data>findMaxNodeInBst(root->left)->data:true)&&(root->right?root->data<findMinimuminBst(root->right)->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
+}
 /**********************
 int numberOftreesPossibleWithNnodes(int n)
 {
@@ -162,6 +163,7 @@ int numberOftreesPossibleWithNnodes(int n)
         return sum;
     }
 }*///////////////////////////////////////////////////
+/************************************************************
 int leastCommonanAncesstorOfTwoNodes(Bst* root,int a,int b)
 {
     if(!root)
@@ -173,7 +175,7 @@ int leastCommonanAncesstorOfTwoNodes(Bst* root,int a,int b)
         return root->data;
     else
         return leastCommonanAncesstorOfTwoNodes(root->left,a,b)?leastCommonanAncesstorOfTwoNodes(root->left,a,b):leastCommonanAncesstorOfTwoNodes(root->right,a,b);
-}
+}*//////////////////////////////////////////////////////////////////////////
 int main()
 {
    Bst* root=NULL;
@@ -209,13 +211,13 @@ int main()
     int dataForLcs1,dataForLcs2;
     cin>>dataForLcs1>>dataForLcs2;
     cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
-  /**************************  if(isBinarySearchTree(root))
-        cout<<"yes";*/////////////////////////////////////////////////////////
+  if(isBinarySearchTree(root))
+        cout<<"yes";
      /************   int numberofnodes;
         cin>>numberofnodes;
         cout<<numberOftreesPossibleWithNnodes(numberofnodes);*//////////////////
-    int a,b;
+ /**********************int a,b;
     cin>>a>>b;
-    cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);
+    cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);*////////////////////////////
     return 0;
 }
