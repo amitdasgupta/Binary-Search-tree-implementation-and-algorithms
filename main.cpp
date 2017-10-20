@@ -28,14 +28,14 @@ void insertIntoBinaryTree(Bst* &root,int data)
 
 
 }
-/*************************************code for finding minimum element in bst*/////////////////////
+/*************************************code for finding minimum element in bst
 Bst* findMinimuminBst(Bst* root)
 {
     if(!root->left)
         return root;
     else
         return findMinimuminBst(root->left);
-}
+}*/////////////////////
 /***************************************doin inorde traversal*/////////////////////////////////
 void inOrderTraversal(Bst* root)
 {
@@ -45,23 +45,23 @@ void inOrderTraversal(Bst* root)
     cout<<root->data<<" ";
     inOrderTraversal(root->right);
 }
-/*************************************checking presence of node with given data*/////////////////////
+/*************************************checking presence of node with given data
 bool findNodeInBst(Bst* root,int data)
 {
     if(!root)
         return false;
     else
         return root->data==data||findNodeInBst(root->left,data)||findNodeInBst(root->right,data);
-}
-/*************************************code for finding maximum element in bst*/////////////////////
+}*/////////////////////
+/*************************************code for finding maximum element in bst
 Bst* findMaxNodeInBst(Bst* root)
 {
     if(!root->right)
         return root;
     else
         return findMaxNodeInBst(root->right);
-}
-/******************************finding pointer of given node*///////////////////////
+}*/////////////////////
+/******************************finding pointer of given node
 Bst* findNode(Bst* root,int data)
 {
     if(!root)
@@ -74,8 +74,8 @@ Bst* findNode(Bst* root,int data)
         return findNode(root->left,data);
     else
         return findNode(root->right,data);
-}
-/*********************************************finding inOrder prdesessor and succesor of any given node*//////////////////////
+}*///////////////////////
+/*********************************************finding inOrder prdesessor and succesor of any given node
 void inOrderPredesecceorandsuccesor(Bst* root,Bst* &mi,Bst* &ma,int data)
 {
     if(!root)
@@ -87,8 +87,8 @@ void inOrderPredesecceorandsuccesor(Bst* root,Bst* &mi,Bst* &ma,int data)
         ma=findMinimuminBst(root1->right);
         //cout<<mi->data<<" "<<ma->data;
     }
-}
-/*************************************code for deleting a node*/////////////////////////////////////////////////
+}*//////////////////////
+/*************************************code for deleting a node
 void deleteNodeInBst(Bst* &root,int data)
 {
     if(!root)
@@ -124,6 +124,27 @@ void deleteNodeInBst(Bst* &root,int data)
             deleteNodeInBst(root->left,data);
             deleteNodeInBst(root->right,data);
         }
+}*////////////////////////////////////////
+/******************************
+int LeastCommonAncessorInBst(Bst* root,int a,int b)
+{
+    if(!root)
+        return 0;
+    if(((a<root->data&&root->data<b)||(b<root->data&&root->data<a)))
+    {
+        return root->data;
+    }
+    else
+        return (LeastCommonAncessorInBst(root->left,a,b)?LeastCommonAncessorInBst(root->left,a,b):LeastCommonAncessorInBst(root->right,a,b))?(LeastCommonAncessorInBst(root->left,a,b)?LeastCommonAncessorInBst(root->left,a,b):LeastCommonAncessorInBst(root->right,a,b)):(root->data==a?a:b);
+
+}
+*//////////////////////////////////////////////////
+bool isBinarySearchTree(Bst* root)
+{
+    if(!root||!root->left&&!root->right)
+        return true;
+    else
+        return ((root->left?root->data>root->left->data:true)&&(root->right?root->data<root->right->data:true)&&isBinarySearchTree(root->left)&&isBinarySearchTree(root->right)?true:false);
 }
 int main()
 {
@@ -137,14 +158,16 @@ int main()
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
    cout<<"\n";
-   int data;
-   cin>>data;
-   if(findNodeInBst(root,data))
+    /*********************
+    implementation of basic algorithms
+     int data;
+    cin>>data;
+    if(findNodeInBst(root,data))
     cout<<"element is found";
-   else
+    else
     cout<<"element is not found";
     cout<<"\n minimum is:"<<findMinimuminBst(root)->data<<"\n";
-    cout<<findMaxNodeInBst(root)->data;*///////////////
+    cout<<findMaxNodeInBst(root)->data;
     Bst* mi=NULL;
     Bst* ma=NULL;
     int data;
@@ -155,5 +178,10 @@ int main()
     cin>>data;
     deleteNodeInBst(root,data);
     inOrderTraversal(root);
+    int dataForLcs1,dataForLcs2;
+    cin>>dataForLcs1>>dataForLcs2;
+    cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
+    if(isBinarySearchTree(root))
+        cout<<"yes";
     return 0;
 }
