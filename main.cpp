@@ -14,7 +14,7 @@ public:
         this->right=NULL;
     }
 };
-/****************************Linked list defination*//////////////////////////////
+/****************************Linked list defination
 class Linked
 {
 public:
@@ -26,7 +26,8 @@ public:
         this->next=NULL;
     }
 };
-/**************************************************function to print linked list*////////////////////////////////
+*//////////////////////////////
+/**************************************************function to print linked list
 void prinLinkedList(Linked* head)
 {
     while(head)
@@ -35,7 +36,8 @@ void prinLinkedList(Linked* head)
         head=head->next;
     }
 }
-/*****************************function to insert into linked list*///////////////////////////////////////////////
+*////////////////////////////////
+/*****************************function to insert into linked list
 void insertIntoLinkedList(Linked* &head,int data)
 {
     if(!head)
@@ -52,6 +54,7 @@ void insertIntoLinkedList(Linked* &head,int data)
         temp->next=new Linked(data);
     }
 }
+*///////////////////////////////////////////////
 /*************************defination of doubly linked list
 class Dll
 {
@@ -117,14 +120,14 @@ bool findNodeInBst(Bst* root,int data)
     else
         return root->data==data||findNodeInBst(root->left,data)||findNodeInBst(root->right,data);
 }*/////////////////////
-/***************************************************
+/****************************************************/////////////////////////////////////////
 Bst* findMaxNodeInBst(Bst* root)
 {
     if(!root->right)
         return root;
     else
         return findMaxNodeInBst(root->right);
-}*/////////////////////////////////////////
+}
 /******************************finding pointer of given node
 Bst* findNode(Bst* root,int data)
 {
@@ -293,6 +296,7 @@ Bst* conversionFromDoublyLinkedListToBst(Bst* root)
     }
 
 }*////////////////////////////////////////////////////////////////////////////////////
+/****************function to give bst from sorted array
 Bst* givingBstFromSortedArray(int arr[10000],int start,int ending)
 {
 if(start>ending)
@@ -312,7 +316,7 @@ else
     temp->right=givingBstFromSortedArray(arr,mid+1,ending);
     return temp;
 }
-}
+}*///////////////////////////////////////////////////////////////////////////////
 /**************
 Dll* convesrionFromBstToDll(Bst* root,Dll* head)
 {
@@ -324,7 +328,7 @@ Dll* convesrionFromBstToDll(Bst* root,Dll* head)
             head->next=convesrionFromBstToDll(root->righ,)
         }
 }*///////////////////////////////////
-/************************************function to conver linked list to binary search tree*///////////////////////////
+/************************************function to conver linked list to binary search tree*
 Bst* conversionFromLinkedListToBinarySearchTree(Linked* &head,int n)
 {
     if(n<=0)
@@ -338,11 +342,30 @@ Bst* conversionFromLinkedListToBinarySearchTree(Linked* &head,int n)
         newnode->right=conversionFromLinkedListToBinarySearchTree(head,n-n/2-1);
         return newnode;
     }
+}*/
+/*******************************function to find Kth smallest element*////////////////////
+int giveKthSmallestElement(Bst* root,int k,int &temp)
+{   if(!root)
+return 0;
+    else
+{
+    int left=giveKthSmallestElement(root->left,k,temp);
+    if(left)
+        return left;
+    temp=temp+1;
+    if(temp==k)
+        return root->data;
+    int right=giveKthSmallestElement(root->right,k,temp);
+    if(right)
+        return right;
+    return 0;
+}
+
 }
 int main()
 {
    Bst* root=NULL;
-   /****************
+
    insertIntoBinaryTree(root,10);
    insertIntoBinaryTree(root,6);
    insertIntoBinaryTree(root,16);
@@ -351,7 +374,7 @@ int main()
    insertIntoBinaryTree(root,13);
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
-   cout<<"\n";*//////////////////////////////////////
+   cout<<"\n";
     /*********************
     implementation of basic algorithms
      int data;
@@ -402,7 +425,7 @@ int main()
     inOrderTraversal(root);
     cout<<"\n";
     preOrderTraversal(root);*///////////////////////////////////
-    Linked* head=NULL;
+  /**********************  Linked* head=NULL;
     int n;
     cin>>n;
     int i=n,temp;
@@ -413,9 +436,14 @@ int main()
     }
     prinLinkedList(head);
     Bst* headgotfromlinkedlist=conversionFromLinkedListToBinarySearchTree(head,n);
-    cout<<"\nInorder traversal";
+    cout<<"\nInorder traversal:";
     inOrderTraversal(headgotfromlinkedlist);
-    cout<<"\npreOrder traversal";
+    cout<<"\npreOrder traversal:";
     preOrderTraversal(headgotfromlinkedlist);
+    *////////////////////////////////////////////////
+    int k,temp=0;
+    cin>>k;
+    cout<<giveKthSmallestElement(root,k,temp);
     return 0;
+
 }
