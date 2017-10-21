@@ -59,6 +59,18 @@ void inOrderTraversal(Bst* root)
     cout<<root->data<<" ";
     inOrderTraversal(root->right);
 }
+/*************************preorder traversal*//////////////////////////////
+void preOrderTraversal(Bst* root)
+{
+    if(!root)
+        return;
+    else
+    {
+        cout<<root->data<<" ";
+        preOrderTraversal(root->left);
+        preOrderTraversal(root->right);
+    }
+}
 /*************************************checking presence of node with given data
 bool findNodeInBst(Bst* root,int data)
 {
@@ -187,7 +199,7 @@ int leastCommonanAncesstorOfTwoNodes(Bst* root,int a,int b)
         return leastCommonanAncesstorOfTwoNodes(root->left,a,b)?leastCommonanAncesstorOfTwoNodes(root->left,a,b):leastCommonanAncesstorOfTwoNodes(root->right,a,b);
 }*//////////////////////////////////////////////////////////////////////////
 
-void conversionFromBstToDoublyLinkedList(Bst* root,Bst* &last,Bst* &headpointer)
+/*************************void conversionFromBstToDoublyLinkedList(Bst* root,Bst* &last,Bst* &headpointer)
 {
     if(!root)
         return;
@@ -242,6 +254,26 @@ Bst* conversionFromDoublyLinkedListToBst(Bst* root)
                 return temp;
     }
 
+}*////////////////////////////////////////////////////////////////////////////////////
+Bst* givingBstFromSortedArray(int arr[10000],int start,int ending)
+{
+if(start>ending)
+    return NULL;
+else
+    if(start==ending)
+{
+    Bst* temp=new Bst(arr[start]);
+    return temp;
+}
+else
+{
+    int mid=(ending-start+1)/2;
+   // cout<<arr[(ending-start+1)/2]<<" ";
+    Bst* temp=new Bst(arr[mid]);
+    temp->left=givingBstFromSortedArray(arr,start,mid-1);
+    temp->right=givingBstFromSortedArray(arr,mid+1,ending);
+    return temp;
+}
 }
 /**************
 Dll* convesrionFromBstToDll(Bst* root,Dll* head)
@@ -255,7 +287,7 @@ Dll* convesrionFromBstToDll(Bst* root,Dll* head)
         }
 }*///////////////////////////////////
 int main()
-{
+{/****************
    Bst* root=NULL;
    insertIntoBinaryTree(root,10);
    insertIntoBinaryTree(root,6);
@@ -265,7 +297,7 @@ int main()
    insertIntoBinaryTree(root,13);
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
-   cout<<"\n";
+   cout<<"\n";*//////////////////////////////////////
     /*********************
     implementation of basic algorithms
      int data;
@@ -297,12 +329,24 @@ int main()
  /**********************int a,b;
     cin>>a>>b;
     cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);*////////////////////////////
-    Bst* head=NULL;
+    /********************Bst* head=NULL;
     Bst* last=NULL;
     conversionFromBstToDoublyLinkedList(root,last,head);
    // printDoublyLinkedList(head);
     Bst* converted=conversionFromDoublyLinkedListToBst(head);
     cout<<"\n";
-    inOrderTraversal(converted);
+    inOrderTraversal(converted);*///////////////////////////////////
+    int arr[100000],n,temp,i;
+    cout<<"enter the number of elements in array";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        cin>>temp;
+        arr[i]=temp;
+    }
+    Bst* root=givingBstFromSortedArray(arr,0,n-1);
+    inOrderTraversal(root);
+    cout<<"\n";
+    preOrderTraversal(root);
     return 0;
 }
