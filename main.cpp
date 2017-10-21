@@ -361,7 +361,7 @@ return 0;
     return 0;
 }
 *////////////////////
-Bst* ceilOfBST(Bst* root,int data)
+Bst* floorOfBST(Bst* root,int data)
 {
     if(!root)
         return NULL;
@@ -373,11 +373,11 @@ Bst* ceilOfBST(Bst* root,int data)
     else
         if(root->data>data)
         {
-           return ceilOfBST(root->left,data);
+           return floorOfBST(root->left,data);
         }
         else
         {
-            Bst* right=ceilOfBST(root->right,data);
+            Bst* right=floorOfBST(root->right,data);
             if(right)
                 return right;
             else
@@ -471,7 +471,7 @@ int main()
     *////////////////////////
     int ceildata;
     cin>>ceildata;
-    Bst* result=ceilOfBST(root,ceildata);
+    Bst* result=floorOfBST(root,ceildata);
     if(!result)
         cout<<"floor does not exist";
     else
