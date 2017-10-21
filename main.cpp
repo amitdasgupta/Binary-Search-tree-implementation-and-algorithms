@@ -14,6 +14,44 @@ public:
         this->right=NULL;
     }
 };
+/****************************Linked list defination*//////////////////////////////
+class Linked
+{
+public:
+    int data;
+    Linked* next;
+    Linked(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+/**************************************************function to print linked list*////////////////////////////////
+void prinLinkedList(Linked* head)
+{
+    while(head)
+    {
+        cout<<head->data<<" ";
+        head=head->next;
+    }
+}
+/*****************************function to insert into linked list*///////////////////////////////////////////////
+void insertIntoLinkedList(Linked* &head,int data)
+{
+    if(!head)
+    {
+        head=new Linked(data);
+    }
+    else
+    {
+       Linked* temp=head;
+        while(temp->next)
+        {
+            temp=temp->next;
+        }
+        temp->next=new Linked(data);
+    }
+}
 /*************************defination of doubly linked list
 class Dll
 {
@@ -286,9 +324,25 @@ Dll* convesrionFromBstToDll(Bst* root,Dll* head)
             head->next=convesrionFromBstToDll(root->righ,)
         }
 }*///////////////////////////////////
+/************************************function to conver linked list to binary search tree*///////////////////////////
+Bst* conversionFromLinkedListToBinarySearchTree(Linked* &head,int n)
+{
+    if(n<=0)
+        return NULL;
+    else
+    {
+        Bst* left=conversionFromLinkedListToBinarySearchTree(head,n/2);
+        Bst* newnode=new Bst(head->data);
+        newnode->left=left;
+        head=head->next;
+        newnode->right=conversionFromLinkedListToBinarySearchTree(head,n-n/2-1);
+        return newnode;
+    }
+}
 int main()
-{/****************
+{
    Bst* root=NULL;
+   /****************
    insertIntoBinaryTree(root,10);
    insertIntoBinaryTree(root,6);
    insertIntoBinaryTree(root,16);
@@ -336,7 +390,7 @@ int main()
     Bst* converted=conversionFromDoublyLinkedListToBst(head);
     cout<<"\n";
     inOrderTraversal(converted);*///////////////////////////////////
-    int arr[100000],n,temp,i;
+ /********************************   int arr[100000],n,temp,i;
     cout<<"enter the number of elements in array";
     cin>>n;
     for(i=0;i<n;i++)
@@ -347,6 +401,21 @@ int main()
     Bst* root=givingBstFromSortedArray(arr,0,n-1);
     inOrderTraversal(root);
     cout<<"\n";
-    preOrderTraversal(root);
+    preOrderTraversal(root);*///////////////////////////////////
+    Linked* head=NULL;
+    int n;
+    cin>>n;
+    int i=n,temp;
+    while(i--)
+    {
+        cin>>temp;
+        insertIntoLinkedList(head,temp);
+    }
+    prinLinkedList(head);
+    Bst* headgotfromlinkedlist=conversionFromLinkedListToBinarySearchTree(head,n);
+    cout<<"\nInorder traversal";
+    inOrderTraversal(headgotfromlinkedlist);
+    cout<<"\npreOrder traversal";
+    preOrderTraversal(headgotfromlinkedlist);
     return 0;
 }
