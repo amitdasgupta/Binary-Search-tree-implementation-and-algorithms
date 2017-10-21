@@ -343,7 +343,7 @@ Bst* conversionFromLinkedListToBinarySearchTree(Linked* &head,int n)
         return newnode;
     }
 }*/
-/*******************************function to find Kth smallest element*////////////////////
+/*******************************function to find Kth smallest element
 int giveKthSmallestElement(Bst* root,int k,int &temp)
 {   if(!root)
 return 0;
@@ -360,8 +360,32 @@ return 0;
         return right;
     return 0;
 }
-
+*////////////////////
+Bst* ceilOfBST(Bst* root,int data)
+{
+    if(!root)
+        return NULL;
+    else
+        if(root->data==data)
+    {
+        return root;
+    }
+    else
+        if(root->data>data)
+        {
+           return ceilOfBST(root->left,data);
+        }
+        else
+        {
+            Bst* right=ceilOfBST(root->right,data);
+            if(right)
+                return right;
+            else
+                return root;
+        }
 }
+
+
 int main()
 {
    Bst* root=NULL;
@@ -441,9 +465,17 @@ int main()
     cout<<"\npreOrder traversal:";
     preOrderTraversal(headgotfromlinkedlist);
     *////////////////////////////////////////////////
-    int k,temp=0;
+  /***************************************  int k,temp=0;
     cin>>k;
     cout<<giveKthSmallestElement(root,k,temp);
+    *////////////////////////
+    int ceildata;
+    cin>>ceildata;
+    Bst* result=ceilOfBST(root,ceildata);
+    if(!result)
+        cout<<"floor does not exist";
+    else
+        cout<<result->data;
     return 0;
 
 }
