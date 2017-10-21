@@ -361,6 +361,7 @@ return 0;
     return 0;
 }
 *////////////////////
+/********************************************************
 Bst* floorOfBST(Bst* root,int data)
 {
     if(!root)
@@ -384,8 +385,26 @@ Bst* floorOfBST(Bst* root,int data)
                 return root;
         }
 }
-
-
+*//////////////////////////////////////////////////////////////////////
+Bst* ceilOfBst(Bst* root,int data)
+{
+    if(!root)
+        return NULL;
+    else
+        if(root->data==data)
+        return root;
+    else
+        if(data<root->data)
+    {
+        Bst* left=ceilOfBst(root->left,data);
+        if(left)
+            return left;
+        else
+            return root;
+    }
+    else
+        return ceilOfBst(root->right,data);
+}
 int main()
 {
    Bst* root=NULL;
@@ -469,13 +488,21 @@ int main()
     cin>>k;
     cout<<giveKthSmallestElement(root,k,temp);
     *////////////////////////
-    int ceildata;
+/**********************    int ceildata;
     cin>>ceildata;
     Bst* result=floorOfBST(root,ceildata);
     if(!result)
         cout<<"floor does not exist";
     else
+        cout<<result->data;*////////////////////////////////////////////
+        int ceildata;
+    cin>>ceildata;
+    Bst* result=ceilOfBst(root,ceildata);
+    if(!result)
+        cout<<"ciel does not exist";
+    else
         cout<<result->data;
+
     return 0;
 
 }
