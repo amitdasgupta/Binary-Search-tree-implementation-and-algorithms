@@ -435,6 +435,7 @@ Linked* mergeSort(Linked* head,int n)
         return head;
     else
     {
+        cout<<"c";
         Linked *temppointer=head,*previoustemp,*start,*last;
       int temp=n/2;
       while(temp--)
@@ -442,8 +443,8 @@ Linked* mergeSort(Linked* head,int n)
             previoustemp=temppointer;
             temppointer=temppointer->next;
         }
-      start=mergeSort(head,n/2);
       previoustemp->next=NULL;
+      start=mergeSort(head,n/2);
       last=mergeSort(temppointer,n-n/2);
       return mergeAndSort(start,last);
 
@@ -550,24 +551,25 @@ int main()
     *////////////////////////////////////////////
     Linked *head1=NULL,*head2=NULL;
     int m,n;
-    cin>>m>>n;
+    cin>>m;
     int i=m,temp;
     while(i--)
     {
         cin>>temp;
         insertIntoLinkedList(head1,temp);
     }
-    i=n;
+    /************i=n;
     while(i--)
     {
         cin>>temp;
         insertIntoLinkedList(head2,temp);
-    }
+    }*////////////////////////////
     prinLinkedList(head1);
     cout<<"\n";
-    prinLinkedList(head2);
+    /******prinLinkedList(head2);
     Linked* sorte=mergeAndSort(head1,head2);
-    cout<<"\n";
+    cout<<"\n";*//////////////////////
+    Linked* sorte=mergeSort(head1,m);
     prinLinkedList(sorte);
     return 0;
 
