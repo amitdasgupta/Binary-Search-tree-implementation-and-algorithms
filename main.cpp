@@ -453,6 +453,7 @@ Linked* mergeSort(Linked* head,int n)
 
     }
 }*//////////////////////////////////////////
+/*********************************
 void insertIntoMapUsingInorderTraversal(Bst* root,map<int,int> &map_)
 {
     if(!root)
@@ -465,7 +466,8 @@ void insertIntoMapUsingInorderTraversal(Bst* root,map<int,int> &map_)
         insertIntoMapUsingInorderTraversal(root->right,map_);
 
     }
-}
+}*/////////////////////////////////////////
+/**************************************************
 void getIntersectionOfBst(Bst* root,map<int,int> map_,deque<int> &deque_)
 {
     if(!root)
@@ -479,6 +481,33 @@ void getIntersectionOfBst(Bst* root,map<int,int> map_,deque<int> &deque_)
         }
         getIntersectionOfBst(root->right,map_,deque_);
     }
+}**/
+void insertIntoMapUsingInorderTraversal(Bst* root,map<int,int> &map_,deque<int> &deque_)
+{
+    if(!root)
+        return;
+   else
+    {
+        insertIntoMapUsingInorderTraversal(root->left,map_,deque_);
+        //cout<<root->data<<" ";
+         map_.insert(pair <int,int>(root->data,0));
+         deque_.push_back(root->data);
+        insertIntoMapUsingInorderTraversal(root->right,map_,deque_);
+
+    }
+}
+void getUnionOfBst(Bst* root,map<int,int> &map_,deque<int> &deque_)
+{
+    if(!root)
+    return;
+    else
+    {
+        getUnionOfBst(root->left,map_,deque_);
+        if(map_.find(root->data)==map_.end())
+            deque_.push_back(root->data);
+        getUnionOfBst(root->right,map_,deque_);
+    }
+
 }
 int main()
 { /*********************/////////////////////////////////////////////
@@ -612,9 +641,10 @@ int main()
    inOrderTraversal(root2);
    cout<<"\n";
    map<int,int> map_;
+   deque<int> deque_;
 
-   insertIntoMapUsingInorderTraversal(root,map_);
-   cout<<"Giving union of the given trees\n";
+   insertIntoMapUsingInorderTraversal(root,map_,deque_);
+  /*************** cout<<"Giving union of the given trees\n";
    deque<int> deque_;
    getIntersectionOfBst(root2,map_,deque_);
    int temp;
@@ -624,7 +654,15 @@ int main()
        cout<<deque_.front()<<" ";
        deque_.pop_front();
    }
+*////////////////////////////////////////////////////////////////
+//insertIntoMapUsingInorderTraversal(root,map_);
+  getUnionOfBst(root2,map_,deque_);
+  while(!deque_.empty())
+   {
 
+       cout<<deque_.front()<<" ";
+       deque_.pop_front();
+   }
    return 0;
 
 }
