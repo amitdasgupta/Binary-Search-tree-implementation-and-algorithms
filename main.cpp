@@ -14,7 +14,7 @@ public:
         this->right=NULL;
     }
 };
-/****************************Linked list defination
+/****************************Linked list defination*//////////////////////////////
 class Linked
 {
 public:
@@ -26,8 +26,8 @@ public:
         this->next=NULL;
     }
 };
-*//////////////////////////////
-/**************************************************function to print linked list
+
+/**************************************************function to print linked list*////////////////////////////////
 void prinLinkedList(Linked* head)
 {
     while(head)
@@ -36,8 +36,8 @@ void prinLinkedList(Linked* head)
         head=head->next;
     }
 }
-*////////////////////////////////
-/*****************************function to insert into linked list
+
+/*****************************function to insert into linked list*///////////////////////////////////////////////
 void insertIntoLinkedList(Linked* &head,int data)
 {
     if(!head)
@@ -54,7 +54,7 @@ void insertIntoLinkedList(Linked* &head,int data)
         temp->next=new Linked(data);
     }
 }
-*///////////////////////////////////////////////
+
 /*************************defination of doubly linked list
 class Dll
 {
@@ -386,6 +386,7 @@ Bst* floorOfBST(Bst* root,int data)
         }
 }
 *//////////////////////////////////////////////////////////////////////
+/******************************function to find ceil of bst
 Bst* ceilOfBst(Bst* root,int data)
 {
     if(!root)
@@ -404,9 +405,53 @@ Bst* ceilOfBst(Bst* root,int data)
     }
     else
         return ceilOfBst(root->right,data);
+}*////////////////////////////////////////////////////////////////////////
+Linked* mergeAndSort(Linked* head1,Linked* head2)
+{
+    if(!head1&&!head2)
+        return NULL;
+    else
+        if(!head1||!head2)
+        return head1?head1:head2;
+    else
+    {   Linked* head=NULL;
+        if(head1->data<head2->data)
+        {
+            head=head1;
+            head->next=mergeAndSort(head1->next,head2);
+        }
+        else
+           // if(head1->data<head2->data)
+        {
+            head=head2;
+           head->next= mergeAndSort(head1,head2->next);
+        }
+            return head;
+    }
+}
+Linked* mergeSort(Linked* head,int n)
+{
+    if(!head||!head->next)
+        return head;
+    else
+    {
+        Linked *temppointer=head,*previoustemp,*start,*last;
+      int temp=n/2;
+      while(temp--)
+        {
+            previoustemp=temppointer;
+            temppointer=temppointer->next;
+        }
+      start=mergeSort(head,n/2);
+      previoustemp->next=NULL;
+      last=mergeSort(temppointer,n-n/2);
+      return mergeAndSort(start,last);
+
+
+    }
 }
 int main()
-{
+{ /********************
    Bst* root=NULL;
 
    insertIntoBinaryTree(root,10);
@@ -417,7 +462,7 @@ int main()
    insertIntoBinaryTree(root,13);
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
-   cout<<"\n";
+   cout<<"\n";*/////////////////////////////////////////////
     /*********************
     implementation of basic algorithms
      int data;
@@ -441,12 +486,12 @@ int main()
     int dataForLcs1,dataForLcs2;
     cin>>dataForLcs1>>dataForLcs2;
     cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
-/***  if(isBinarySearchTree(root))
+    /***  if(isBinarySearchTree(root))
         cout<<"yes";*/
      /************   int numberofnodes;
         cin>>numberofnodes;
         cout<<numberOftreesPossibleWithNnodes(numberofnodes);*//////////////////
- /**********************int a,b;
+    /**********************int a,b;
     cin>>a>>b;
     cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);*////////////////////////////
     /********************Bst* head=NULL;
@@ -456,7 +501,7 @@ int main()
     Bst* converted=conversionFromDoublyLinkedListToBst(head);
     cout<<"\n";
     inOrderTraversal(converted);*///////////////////////////////////
- /********************************   int arr[100000],n,temp,i;
+    /********************************   int arr[100000],n,temp,i;
     cout<<"enter the number of elements in array";
     cin>>n;
     for(i=0;i<n;i++)
@@ -468,7 +513,7 @@ int main()
     inOrderTraversal(root);
     cout<<"\n";
     preOrderTraversal(root);*///////////////////////////////////
-  /**********************  Linked* head=NULL;
+    /**********************  Linked* head=NULL;
     int n;
     cin>>n;
     int i=n,temp;
@@ -484,25 +529,46 @@ int main()
     cout<<"\npreOrder traversal:";
     preOrderTraversal(headgotfromlinkedlist);
     *////////////////////////////////////////////////
-  /***************************************  int k,temp=0;
+    /***************************************  int k,temp=0;
     cin>>k;
     cout<<giveKthSmallestElement(root,k,temp);
     *////////////////////////
-/**********************    int ceildata;
+    /**********************    int ceildata;
     cin>>ceildata;
     Bst* result=floorOfBST(root,ceildata);
     if(!result)
         cout<<"floor does not exist";
     else
         cout<<result->data;*////////////////////////////////////////////
-        int ceildata;
+    /******************     int ceildata;
     cin>>ceildata;
     Bst* result=ceilOfBst(root,ceildata);
     if(!result)
         cout<<"ciel does not exist";
     else
         cout<<result->data;
-
+    *////////////////////////////////////////////
+    Linked *head1=NULL,*head2=NULL;
+    int m,n;
+    cin>>m>>n;
+    int i=m,temp;
+    while(i--)
+    {
+        cin>>temp;
+        insertIntoLinkedList(head1,temp);
+    }
+    i=n;
+    while(i--)
+    {
+        cin>>temp;
+        insertIntoLinkedList(head2,temp);
+    }
+    prinLinkedList(head1);
+    cout<<"\n";
+    prinLinkedList(head2);
+    Linked* sorte=mergeAndSort(head1,head2);
+    cout<<"\n";
+    prinLinkedList(sorte);
     return 0;
 
 }
