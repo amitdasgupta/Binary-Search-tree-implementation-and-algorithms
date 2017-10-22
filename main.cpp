@@ -1,5 +1,7 @@
 #include <iostream>
 #include<math.h>
+#include<map>
+#include<deque>
 using namespace std;
 class Bst{
 /****************tree defination*/////////////////////////
@@ -406,6 +408,7 @@ Bst* ceilOfBst(Bst* root,int data)
     else
         return ceilOfBst(root->right,data);
 }*////////////////////////////////////////////////////////////////////////
+/**************************************************
 Linked* mergeAndSort(Linked* head1,Linked* head2)
 {
     if(!head1&&!head2)
@@ -435,7 +438,6 @@ Linked* mergeSort(Linked* head,int n)
         return head;
     else
     {
-        cout<<"c";
         Linked *temppointer=head,*previoustemp,*start,*last;
       int temp=n/2;
       while(temp--)
@@ -450,9 +452,36 @@ Linked* mergeSort(Linked* head,int n)
 
 
     }
+}*//////////////////////////////////////////
+void insertIntoMapUsingInorderTraversal(Bst* root,map<int,int> &map_)
+{
+    if(!root)
+        return;
+   else
+    {
+        insertIntoMapUsingInorderTraversal(root->left,map_);
+        //cout<<root->data<<" ";
+         map_.insert(pair <int,int>(root->data,0));
+        insertIntoMapUsingInorderTraversal(root->right,map_);
+
+    }
+}
+void getIntersectionOfBst(Bst* root,map<int,int> map_,deque<int> &deque_)
+{
+    if(!root)
+        return;
+    else
+    {
+        getIntersectionOfBst(root->left,map_,deque_);
+        if(map_.find(root->data)!=map_.end())
+        {
+            deque_.push_back(root->data);
+        }
+        getIntersectionOfBst(root->right,map_,deque_);
+    }
 }
 int main()
-{ /********************
+{ /*********************/////////////////////////////////////////////
    Bst* root=NULL;
 
    insertIntoBinaryTree(root,10);
@@ -463,7 +492,7 @@ int main()
    insertIntoBinaryTree(root,13);
    insertIntoBinaryTree(root,7);
    inOrderTraversal(root);
-   cout<<"\n";*/////////////////////////////////////////////
+   cout<<"\n";
     /*********************
     implementation of basic algorithms
      int data;
@@ -549,7 +578,7 @@ int main()
     else
         cout<<result->data;
     *////////////////////////////////////////////
-    Linked *head1=NULL,*head2=NULL;
+  /**************************  Linked *head1=NULL,*head2=NULL;
     int m,n;
     cin>>m;
     int i=m,temp;
@@ -557,20 +586,45 @@ int main()
     {
         cin>>temp;
         insertIntoLinkedList(head1,temp);
-    }
+    }*////////////////////////////////////////////////////
     /************i=n;
     while(i--)
     {
         cin>>temp;
         insertIntoLinkedList(head2,temp);
     }*////////////////////////////
-    prinLinkedList(head1);
-    cout<<"\n";
+  //  prinLinkedList(head1);
+   // cout<<"\n";
     /******prinLinkedList(head2);
     Linked* sorte=mergeAndSort(head1,head2);
     cout<<"\n";*//////////////////////
-    Linked* sorte=mergeSort(head1,m);
-    prinLinkedList(sorte);
-    return 0;
+   /*************** Linked* sorte=mergeSort(head1,m);
+    prinLinkedList(sorte);*////////////////////////////
+    Bst* root2=NULL;
+
+   insertIntoBinaryTree(root2,10);
+   insertIntoBinaryTree(root2,15);
+   insertIntoBinaryTree(root2,20);
+   insertIntoBinaryTree(root2,4);
+   insertIntoBinaryTree(root2,9);
+   insertIntoBinaryTree(root2,13);
+   insertIntoBinaryTree(root2,50);
+   inOrderTraversal(root2);
+   cout<<"\n";
+   map<int,int> map_;
+
+   insertIntoMapUsingInorderTraversal(root,map_);
+   cout<<"Giving union of the given trees\n";
+   deque<int> deque_;
+   getIntersectionOfBst(root2,map_,deque_);
+   int temp;
+   while(!deque_.empty())
+   {
+
+       cout<<deque_.front()<<" ";
+       deque_.pop_front();
+   }
+
+   return 0;
 
 }
