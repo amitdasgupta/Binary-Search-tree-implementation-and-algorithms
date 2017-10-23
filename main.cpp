@@ -29,7 +29,10 @@ public:
     }
 };
 *//////////////////////////////
+<<<<<<< HEAD
 
+=======
+>>>>>>> bd69340aa03e2cb7649cfb0df7c1eeef3b69781b
 /**************************************************function to print linked list
 void prinLinkedList(Linked* head)
 {
@@ -391,7 +394,6 @@ Bst* floorOfBST(Bst* root,int data)
         }
 }
 *//////////////////////////////////////////////////////////////////////
-/******************************function to find ceil of bst
 Bst* ceilOfBst(Bst* root,int data)
 {
     if(!root)
@@ -410,6 +412,7 @@ Bst* ceilOfBst(Bst* root,int data)
     }
     else
         return ceilOfBst(root->right,data);
+<<<<<<< HEAD
 }*////////////////////////////////////////////////////////////////////////
 /**************************************************
 Linked* mergeAndSort(Linked* head1,Linked* head2)
@@ -517,6 +520,11 @@ void getUnionOfBst(Bst* root,map<int,int> &map_,deque<int> &deque_)
 *///////////////////////////////////////////////////////////////
 int main()
 { /*********************/////////////////////////////////////////////
+=======
+}
+int main()
+{
+>>>>>>> parent of 6ed3929... addition of merge sort of two linked list
    Bst* root=NULL;
 
    insertIntoBinaryTree(root,10);
@@ -551,12 +559,12 @@ int main()
     int dataForLcs1,dataForLcs2;
     cin>>dataForLcs1>>dataForLcs2;
     cout<<LeastCommonAncessorInBst(root,dataForLcs1,dataForLcs2);*///////////////////////////////////////
-    /***  if(isBinarySearchTree(root))
+/***  if(isBinarySearchTree(root))
         cout<<"yes";*/
      /************   int numberofnodes;
         cin>>numberofnodes;
         cout<<numberOftreesPossibleWithNnodes(numberofnodes);*//////////////////
-    /**********************int a,b;
+ /**********************int a,b;
     cin>>a>>b;
     cout<<leastCommonanAncesstorOfTwoNodes(root,a,b);*////////////////////////////
     /********************Bst* head=NULL;
@@ -566,7 +574,7 @@ int main()
     Bst* converted=conversionFromDoublyLinkedListToBst(head);
     cout<<"\n";
     inOrderTraversal(converted);*///////////////////////////////////
-    /********************************   int arr[100000],n,temp,i;
+ /********************************   int arr[100000],n,temp,i;
     cout<<"enter the number of elements in array";
     cin>>n;
     for(i=0;i<n;i++)
@@ -578,7 +586,7 @@ int main()
     inOrderTraversal(root);
     cout<<"\n";
     preOrderTraversal(root);*///////////////////////////////////
-    /**********************  Linked* head=NULL;
+  /**********************  Linked* head=NULL;
     int n;
     cin>>n;
     int i=n,temp;
@@ -594,24 +602,25 @@ int main()
     cout<<"\npreOrder traversal:";
     preOrderTraversal(headgotfromlinkedlist);
     *////////////////////////////////////////////////
-    /***************************************  int k,temp=0;
+  /***************************************  int k,temp=0;
     cin>>k;
     cout<<giveKthSmallestElement(root,k,temp);
     *////////////////////////
-    /**********************    int ceildata;
+/**********************    int ceildata;
     cin>>ceildata;
     Bst* result=floorOfBST(root,ceildata);
     if(!result)
         cout<<"floor does not exist";
     else
         cout<<result->data;*////////////////////////////////////////////
-    /******************     int ceildata;
+        int ceildata;
     cin>>ceildata;
     Bst* result=ceilOfBst(root,ceildata);
     if(!result)
         cout<<"ciel does not exist";
     else
         cout<<result->data;
+<<<<<<< HEAD
     *////////////////////////////////////////////
   /**************************  Linked *head1=NULL,*head2=NULL;
     int m,n;
@@ -669,6 +678,14 @@ int main()
        cout<<deque_.front()<<" ";
        deque_.pop_front();
    }
+<<<<<<< HEAD
    return 0;*/////////////////////////////////
+=======
+   return 0;
+=======
+
+    return 0;
+>>>>>>> parent of 6ed3929... addition of merge sort of two linked list
+>>>>>>> bd69340aa03e2cb7649cfb0df7c1eeef3b69781b
 
 }
